@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 
 <body style="margin: 0 200px">
@@ -155,6 +156,7 @@
                 <button id="btn-submit" type="submit" class="btn btn-lg btn-block"
                     style="background-color: rgb(53,121,181); color: white">Submit</button>
             </div>
+            <div id="modal" class="modal"></div>
             <hr>
     </form>
 
@@ -212,10 +214,19 @@
                 $("#question9").val("");
                 $("#question10").val("");
 
-                alert(data.name)
+                // Display modal
+                var modal = $("#modal");
+                var image = $("<img>");
+                image.attr("src", data.photo);
+                image.css("height", "300px");
+                modal.append(image);
+                modal.append("<p>" + data.name + "</p>");
+                modal.modal();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert(textStatus + ": Couldn't retrieve your best match." + errorThrown);
             }
         })
-
     });
 </script>
 
